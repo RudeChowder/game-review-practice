@@ -1,10 +1,17 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import GamesList from "./GamesList"
 
 const GamesPage = () => {
+  const [games, setGames] = useState([])
+  useEffect (() => {
+    fetch("/games")
+    .then(resp => resp.json())
+    .then(gamesData => setGames(gamesData))
+  }, [])
 
   return(
     <div>
-      <h1>Hello world!</h1>
+      <GamesList games={games}/>
     </div>
   )
 }
